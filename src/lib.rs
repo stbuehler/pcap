@@ -515,6 +515,14 @@ impl Capture<Inactive> {
             self
         }
     }
+
+    /// Sets immediate mode on or off. By default, this is off.
+    pub fn immediate(self, to: bool) -> Capture<Inactive> {
+        unsafe {
+            raw::pcap_set_immediate_mode(*self.handle, if to {1} else {0});
+        }
+        self
+    }
 }
 
 ///# Activated captures include `Capture<Active>` and `Capture<Offline>`.
